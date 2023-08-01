@@ -69,8 +69,9 @@ vim.keymap.set('n', '<leader>ef', ':Lspsaga show_cursor_diagnostics<cr>')
 vim.keymap.set('n', '<leader>el', ':TroubleToggle<cr>') -- Show list of diagnostics across the workspace
 vim.keymap.set('n', '<leader>et', ':Trouble<cr>') -- Focus onto the trouble window
 vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<F2>', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<leader>lk', ':Lspsaga hover_doc<cr>')
-vim.keymap.set('n', '<leader>ld', ':Lspsaga preview_definition<cr>')
+vim.keymap.set('n', '<leader>ld', ':Lspsaga peek_definition<CR>')
 vim.keymap.set('n', '<leader>lr', ':Lspsaga rename<cr>')
 vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help)
 vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end)
@@ -109,3 +110,26 @@ vim.keymap.set('n', '<leader>hR', ':Gitsigns reset_buffer')
 vim.keymap.set('n', '<leader>hb', ':Gitsigns blame_line<cr>')
 vim.keymap.set('n', '<leader>hd', ':Gitsigns diffthis<cr>')
 vim.keymap.set('n', '<leader>hs', ':<C-U>Gitsigns select_hunk<CR>')
+
+-- NvimTree
+vim.keymap.set('n', '<F3>', ':NvimTreeFindFileToggle!<CR>')
+
+-- x: Troubles
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>",
+  {silent = true, noremap = true}
+)

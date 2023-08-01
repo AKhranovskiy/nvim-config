@@ -100,6 +100,8 @@ function M.config()
             end, { "i", "s" }),
         },
     })
+
+
     local devicons = require('nvim-web-devicons')
     cmp.register_source('devicons', {
         complete = function(_, _, callback)
@@ -123,12 +125,23 @@ function M.config()
     for _, lsp in pairs(servers) do
         lspconfig[lsp].setup {}
     end
+
     lspconfig.rust_analyzer.setup {                
         settings = {                      
             ["rust-analyzer"] = {
                 procMacro = { enable = true },
             }
         }
+    }
+    
+    --Enable (broadcasting) snippet capability for completion
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    
+    require'lspconfig'.html.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = {'html', 'js', 'css'},
     }
 
     require("lspsaga").setup({
@@ -147,6 +160,28 @@ function M.config()
             kind = {},
         },
     })
+
+    require'lspconfig'.rust_analyzer.setup {
+        on_attach = on_attach,
+        settings = {
+            ["rust-analyzer"] = {
+                imports = {
+                    granularity = {
+                        group = "module",
+                    },
+                    prefix = "self",
+                },
+                cargo = {
+                    buildScripts = {
+                        enable = true,
+                    },
+                },
+                procMacro = {
+                    enable = true
+                },
+            }
+        }
+    }
 
     local glance = require('glance')
     local actions = glance.actions
@@ -262,6 +297,51 @@ function M.config()
         },
         use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
     }
+
+    local opts = {
+        tools = { -- rust-tools options
+            autoSetHints = true,
+            -- hover_with_actions = true,
+            inlay_hints = {
+                show_parameter_hints = true,
+                parameter_hints_prefix = "",
+                other_hints_prefix = "",
+            },
+        },
+        -- all the opts to send to nvim-lspconfig
+        -- these override the defaults set by rust-tools.nvim
+        -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+        server = {
+            -- on_attach is a callback called when the language server attachs to the buffer
+            -- on_attach = on_attach,
+            settings = {
+                -- to enable rust-analyzer settings visit:
+                -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+                ["rust-analyzer"] = {
+                    -- enable clippy on save
+                    checkOnSave = {
+                        command = "clippy"
+                    },
+                    imports = {
+                        granularity = {
+                            group = "module",
+                        },
+                        prefix = "self",
+                    },
+                    cargo = {
+                        buildScripts = {
+                            enable = true,
+                        },
+                    },
+                    procMacro = {
+                        enable = true
+                    },
+                }
+            }
+        },
+    }
+
+    require('rust-tools').setup(opts)
 end
 
 return M

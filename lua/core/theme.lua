@@ -43,11 +43,11 @@
 --    overrides = {},
 --})
 
---vim.cmd("colorscheme kanagawa")
+-- vim.cmd("colorscheme kanagawa")
 
 -- edge
-vim.g.edge_style = 'aura' -- neon, aura
-vim.g.edge_better_performance = 1
+-- vim.g.edge_style = 'neon' -- neon, aura
+-- vim.g.edge_better_performance = 1
 -- vim.cmd("colorscheme edge")
 
 -- github
@@ -57,6 +57,10 @@ vim.g.edge_better_performance = 1
 -- vim.cmd("colorscheme oxocarbon")
 
 -- nordic
-vim.cmd("colorscheme nordic")
+-- vim.cmd("colorscheme nordic")
 
-vim.cmd("set background=dark")
+-- vim.cmd("colorscheme github_light_high_contrast")
+-- vim.cmd("set background=light")
+
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])

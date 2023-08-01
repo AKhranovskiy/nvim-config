@@ -6,7 +6,7 @@ return require('packer').startup(function()
     use 'nvim-lua/plenary.nvim'
     use 'MunifTanjim/nui.nvim'
 
-    use 'nvim-tree/nvim-tree.lua'
+--    use 'nvim-tree/nvim-tree.lua'
 
     -- starup time optimise
     use 'dstein64/vim-startuptime'
@@ -19,22 +19,24 @@ return require('packer').startup(function()
     }
     use 'moll/vim-bbye' -- for more sensible delete buffer cmd
 
-    -- themes
-    use 'sainnhe/sonokai'
-    use 'tiagovla/tokyodark.nvim'
-    use 'projekt0n/github-nvim-theme'
-    use 'joshdick/onedark.vim'
-    use { 'catppuccin/nvim', as='catppuccin' }
+    -- themes (disabled other themes to optimize startup time)
+    -- use 'sainnhe/sonokai'
+    -- use 'tiagovla/tokyodark.nvim'
+    -- use 'projekt0n/github-nvim-theme'
+    -- use 'joshdick/onedark.vim'
+    -- use { 'catppuccin/nvim', as='catppuccin' }
     -- use { 'sonph/onehalf', rtp='vim/' }
     -- use 'liuchengxu/space-vim-dark'
     -- use 'ahmedabdulrahman/aylin.vim'
     -- use 'rebelot/kanagawa.nvim'
-    use 'NLKNguyen/papercolor-theme'
+    -- use 'NLKNguyen/papercolor-theme'
     -- use 'liuchengxu/space-vim-dark'
-    use 'sainnhe/edge'
-    use 'nyoom-engineering/oxocarbon.nvim'
+    -- use 'sainnhe/edge'
+    -- use 'nyoom-engineering/oxocarbon.nvim'
     -- use 'Th3Whit3Wolf/one-nvim'
-    use 'AlexvZyl/nordic.nvim'
+    -- use 'AlexvZyl/nordic.nvim'
+    use 'ellisonleao/gruvbox.nvim'
+
 
     -- language
     use 'neovim/nvim-lspconfig'
@@ -49,11 +51,6 @@ return require('packer').startup(function()
     use 'simrat39/rust-tools.nvim'
     use 'dnlhc/glance.nvim'
     use 'tamago324/nlsp-settings.nvim'
-
-    use {
-        'folke/trouble.nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
-    }
 
     -- git
     use {
@@ -90,7 +87,12 @@ return require('packer').startup(function()
     use 'petertriho/nvim-scrollbar'
 
     -- duck lol
-    use 'tamton-aquib/duck.nvim'
+    -- use 'tamton-aquib/duck.nvim'
+
+    -- AI completion!
+    -- use 'aduros/ai.vim'
+
+    use 'nathom/filetype.nvim'
 
     -- leetcode
     use { "Dhanus3133/LeetBuddy.nvim",
@@ -98,5 +100,26 @@ return require('packer').startup(function()
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
         }
+    }
+
+    -- commenting
+    use 'numToStr/Comment.nvim'
+    
+    -- all the troubles
+    use {
+    	'folke/trouble.nvim',
+    	requires = 'kyazdani42/nvim-web-devicons'
+    }
+    
+    -- autoclose/autorename html tags
+    use 'windwp/nvim-ts-autotag'
+
+    -- file tree
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        },
+        tag = 'nightly'
     }
 end)

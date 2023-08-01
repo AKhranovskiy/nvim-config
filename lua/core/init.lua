@@ -42,9 +42,20 @@ vim.g.loaded_netrwPlugin       = 1
 vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_remote_plugins    = 1
 
+-- require('image').setup {
+--     min_padding = 5,
+--     show_label = true,
+--     render_using_dither = true,
+-- }
+
 -- Load plugin configs
 -- plugins without extra configs are configured directly here
 require("impatient")
+
+-- duck lol
+-- local duck = require("duck")
+-- vim.keymap.set('n', '<leader>dd', function() duck.hatch("🦆", 1) end, {})
+-- vim.keymap.set('n', '<leader>dk', function() duck.cook() end, {})
 
 require("indent_blankline").setup {
     space_char_blankline = " ",
@@ -53,20 +64,35 @@ require("indent_blankline").setup {
 }
 
 require("configs.autocomplete").config()
-require("configs.statusline").config()
-require("configs.treesitter").config()
-require("configs.startscreen").config()
-require("configs.git").config()
 require("configs.bufferline").config()
 require("configs.grammar").config()
-require("configs.terminal").config()
+require("configs.leetcode").config()
 require("configs.nvimtree").config()
 require("configs.scrollbar").config()
+require("configs.startscreen").config()
+require("configs.statusline").config()
 require("configs.telescope").config()
-require("configs.leetcode").config()
+require("configs.terminal").config()
+require("configs.treesitter").config()
 
 require("configs.lang.rust").config()
 
 require("core.keymaps")
 
 require("core.theme")
+
+require("Comment").setup()
+require("trouble").setup()
+
+require("filetype").setup({
+    overrides = {
+        extensions = {
+            tera = "html",
+        },
+	}
+})
+
+require("nvim-tree").setup()
+
+-- require('nvim-ts-autotag').setup()
+
